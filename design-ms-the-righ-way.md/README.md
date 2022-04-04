@@ -67,12 +67,44 @@ https://www.youtube.com/watch?v=j6ow-UemzBc&ab_channel=InfoQ
     - process them by batch
     - failure are record locally and publish to a monitoring system
         - record it locally so you have all the data and don't need to get data to your event queue
-- Events design
+- Events Schema
     - Schema first
     - 1 model /event
     - n events in one union type
     - 1 union type /stream
     - 1 stream own by 1 service
     - most service define... 1 stream 
+    - schema linting
 
 ![alt text](event-schema.png "events schema")
+
+- Producers: db journal
+    - document retention perdio
+    - code generate journal
+    - partions to manage storage
+
+- Producers: Streams
+    - Since there's consistency at every lvl, you don't have to write the stream name, it can be deduced by enforced naming convention
+
+![alt text](producers-streams.png "producer streams")
+
+
+- Dependencies
+    - Upgrade all every week to latest dependencies
+        - this allow to have the small batch of upgrade, with few impact as possible. So it does not take day week or month to upgrade and/or debug in case of problem.
+    - dependency tracking (?) -> dependency.flow.io
+
+- Deploy once the build passes
+
+
+Summary:
+    - schema first for api and events
+        - focus on events
+    - high level of autmation
+        - deployment
+        - code geenration
+        - dependency mgmt
+    - tests
+        - quality
+        - streamlines maintenance
+        - enable CD
