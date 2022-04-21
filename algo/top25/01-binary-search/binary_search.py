@@ -10,6 +10,7 @@ def search(
 
     while low <= high:
         mid = round((low + high) / 2)
+
         if target == inputs[mid]:
             return mid
         elif target <= inputs[mid]:
