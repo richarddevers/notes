@@ -1,5 +1,13 @@
 <https://github.com/Sairyss/domain-driven-hexagon>
 
+## Scalar types
+
+A scalar type can be considered any type that's unknown to the Domain Model. This includes primitive types and types that don't belong to the Domain.
+
+source: <https://github.com/Sairyss/domain-driven-hexagon#application-services>
+
+## Pros vs Cons
+
 Pros:
 
 - easyly testable and scalable
@@ -16,12 +24,12 @@ cons:
 
 ## In short
 
-- DTO (data transfert object <https://martinfowler.com/eaaCatalog/dataTransferObject.html> ) are transmit to cli/api/event. It stimulates the system though these "primary" adapter
+- DTO are transmited to cli/api/event. It stimulates the system though these "primary" adapter
 
 - Controller parse it, map it to a command/query object and pass it to an application
-- Application service handle it. It executes **business logic**.
+- Application service handle it. It executes **domain logic** usin **domain service** and **infrastructure layer**
 Use mapper (a.k.a 'parser') to convert data to Domain Model (business model).
-Use adapter to communicate with external (a.k.a "secondary adapter", the one needed by your system)
+Use adapter (infrastructure layer) to communicate with external (a.k.a "secondary adapter", the one needed by your system)
 - Job finish, it return the data back, eventually converted using mapper
 - controller return it
 
@@ -39,3 +47,21 @@ It encapsulate parts of a highly cohesive business domain.
 <https://www.culttt.com/2014/12/10/modules-domain-driven-design/>
 
 modules vs bound context? In short: Modules represent important concepts inside of Bounded Contexts. (<https://www.culttt.com/2014/11/19/bounded-contexts-context-maps-domain-driven-design>)
+
+# Application Core
+
+Core of the system, build using DDD building blocks
+
+Domain layer:
+
+- Entities
+- Aggregates
+- Domain Services
+- Value Objects
+- Domain Errors
+
+Application layer:
+
+- Application Services
+- Commands and Queries
+- Ports
