@@ -31,3 +31,7 @@ common language between the developers and users
 - to avoir them , create one Data Model per context
 
 <https://martinfowler.com/bliki/BoundedContext.html>
+
+## AnemicDomainModel
+
+<https://martinfowler.com/bliki/AnemicDomainModel.html>

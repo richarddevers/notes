@@ -25,9 +25,9 @@ cons:
 ## In short
 
 - DTO are transmited to cli/api/event. It stimulates the system though these "primary" adapter
-
-- Controller parse it, map it to a command/query object and pass it to an application
-- Application service handle it. It executes **domain logic** usin **domain service** and **infrastructure layer**
+- Controller parse it, map it to a command/query object (create a 'command' object) and pass it to an application.
+In the example, created command are send to a bus.
+- Application service handle the command/query. It executes **domain logic** using **domain service** and **infrastructure layer**
 Use mapper (a.k.a 'parser') to convert data to Domain Model (business model).
 Use adapter (infrastructure layer) to communicate with external (a.k.a "secondary adapter", the one needed by your system)
 - Job finish, it return the data back, eventually converted using mapper
@@ -65,3 +65,61 @@ Application layer:
 - Application Services
 - Commands and Queries
 - Ports
+
+## Application Services
+
+A.k.a:
+
+- workflow services
+- use cases
+- interactors
+- ...
+
+In short:
+
+- Basically, handle the command/query.
+- call outside world using adapter implementing ports
+- if command or query need to call other command, query, use bus
+- operate on scalar type, map them into domain TYpes, using ports if needed.
+- should not depend on other app service (cyclic dependencies)
+- no domain specific business logic (???????)
+
+One service per use case is considered a good practice.
+Use cases are, simply said, list of actions required from an application.
+
+## Command and Query
+
+basically comand modify data and query retrieves it.
+
+command = write
+query = read
+
+By enforcing Command and Query separation, the code becomes simpler to understand. One changes something, another just retrieves data.
+
+Also, following CQS from the start will facilitate separating write and read models into different databases if someday in the future the need for it arises.
+
+Similarly to Commands, Queries can use a Query Bus if needed. This way you can query anything from anywhere without importing repositories directly and avoid coupling.
+
+## Ports
+
+interfaces (abstrac class in python) to define contracts to be implemented by adapters.
+adapter perform (private) action related to tech details but exposed a public "business" api based on ports.
+
+- It abstract tech details from the domain
+- allow different implementation (polymorphism)
+- Mocking and test are easier
+- can delay the tech choice and the dev can still continue (mocking the interface)
+
+# Domain Layer
+
+This layer contains the application's business rules.
+
+## Entities
+
+Core. Encapsulate enterprise business rules and attr.
+Can be object with properties and methods or just function or just data structures.
+
+- entities must protect their invariant (usually the id or something that make sense, for eg, a price of an article can't be negative.).
+- contain domain business logic. Avoid having bl (business logici) in service.
+- strong and consistent identity
+- equality is determined by comparing their identificators

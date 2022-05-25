@@ -14,4 +14,4 @@ Build classes on top of existing one. subclasses have same interface as parent.
 
 ## Polymorphism
 
-Ability to detect the real class of an object and call its implementation even when its realy type is unknown to the current context
+Ability to detect the real class of an object and call its implementation even when its real type is unknown to the current context
