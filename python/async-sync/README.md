@@ -1,6 +1,10 @@
 # Async Python: The Different Forms of Concurrency
 
-source: <http://masnun.rocks/2016/10/06/async-python-the-different-forms-of-concurrency/>
+source:
+
+- <http://masnun.rocks/2016/10/06/async-python-the-different-forms-of-concurrency/>
+
+- <https://medium.com/contentsquare-engineering-blog/multithreading-vs-multiprocessing-in-python-ece023ad55a>
 
 ## Sync
 
@@ -58,10 +62,24 @@ Facts
 
 see: <http://www.dabeaz.com/python/UnderstandingGIL.pdf> (that links hurts a little bit)
 
-# Process
+## MultiProcessing
 
 To get parallelism -> multiprocessing
 
 allow python to spawn multiple process that can run in //
 
 see: <https://pymotw.com/3/multiprocessing/index.html>
+
+## Multithreading
+
+Concurrent. You stil have the GIL, so only one thread at a time.
+
+Good for I/O bound operation.
+
+If one thread wait for an I/O, another one can work.
+
+Basically ancestry of async/await (asyncio) syntax .
+
+Hard to manage. You can easyly mess up.
+
+## Asyncio
