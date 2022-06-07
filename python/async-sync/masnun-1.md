@@ -80,6 +80,28 @@ If one thread wait for an I/O, another one can work.
 
 Basically ancestry of async/await (asyncio) syntax .
 
-Hard to manage. You can easyly mess up.
+Hard to manage. You can easyly mess up. But it exist.
 
 ## Asyncio
+
+Why?
+- Process are costly to spawn/manage
+- multithreading is hard to code/debug/evolv/manage and so on...
+- threads started at the same time must still wait that all are ready before going on to something else
+
+How?
+
+- Event loop: tracks differents I/O events and switch to tasks which are ready and pauses the ones waiting for I/O
+- The event loop is composes of functions and the event loop return a Future object (https://docs.python.org/3/library/asyncio-future.html)
+
+Asyncio  uses generators and coroutines to pause and resume tasks.
+see:
+- https://masnun.com/2015/11/20/python-asyncio-future-task-and-the-event-loop.html
+- https://masnun.com/2015/11/13/python-generators-coroutines-native-coroutines-and-async-await.html
+
+
+# Which ones?
+
+- CPU Bound => Multi Processing
+- I/O Bound, Fast I/O, Limited Number of Connections => Multi Threading
+- I/O Bound, Slow I/O, Many connections => Asyncio
