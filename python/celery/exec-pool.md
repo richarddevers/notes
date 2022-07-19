@@ -40,7 +40,7 @@ Concurrent mode.
 Good for IO bound.
 
 ```console
-
+z
 celery -A tasks worker -P solo
 
 ```
