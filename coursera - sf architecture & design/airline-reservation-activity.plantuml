@@ -1,0 +1,51 @@
+' Create a UML sequence diagram that will show your clients how the system’s classes will interact when customers are buying their flight tickets on the booking website.
+
+' The system should allow the customer to search available flights from the database by inputting their desired location and departure/arrival date.
+' The website will search the database and return the available flights to display.
+' Once the customer has chosen the flight, they will add the flight to their cart and checkout.
+' They will also then input their payment information and once everything is complete, the website should confirm the flight, empty cart and lastly display a confirmation of the ticket for the flight.
+
+@startuml "Airline reservation system"
+
+box "Airline reservation system"
+participant "Customer" as customer
+participant "Website" as website
+participant "Airline Database" as db
+
+
+loop "customer searching for desired flight"
+    customer -> website : input desired location \nand departure/arrival date
+    activate customer
+    activate website
+    website -> db: query flights
+    activate db
+    website <[dashed]- db: return results
+    deactivate db
+    customer <[dashed]- website : display list of results
+    deactivate customer
+    deactivate website
+end
+
+alt "desired flight found"
+    customer -> website: click 'add flight to the cart'
+    activate customer
+    activate website
+    customer <[dashed]- website: update the cart
+    customer -> website: click 'Proceed to payment'
+    customer <[dashed]- website: Show payment page
+    customer -> website: Enter payment information and proceed it
+    website -> db: notify the customer checkout process.\n Send payment information
+    activate db
+    db -> db: proceed the checkout
+    db -> db: empty the cart
+    db -> db: add flight to\n customer's reservations
+    website <[dashed]- db: notify the checkout is ok
+    website <[dashed]- db: emit customer ticket
+    website -> website: empty the cart
+    deactivate db
+    customer <[dashed]- website: confirm reservation
+    deactivate customer
+    deactivate website
+end
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml "SharingApp"
+
+box "SharingApp"
+participant View.OnClickListener as view_on_click_listener
+participant AddItemActivity as add_item_activity
+participant ItemList as item_list
+participant Dimensions as dimensions
+participant Item as item
+
+
+->add_item_activity:onCreate(savedInstanceState)
+add_item_activity->ItemList:loadItems(context)
+...
+->view_on_click_listener: onClick(view)
+view_on_click_listener ->add_item_activity: saveItem(view)
+add_item_activity->dimensions:Dimensions(...)
+add_item_activity->items:Item(...)
+add_item_activity->item_list:addItem(item)
+add_item_activity->item_list:saveItems(context)
+@enduml
+
+

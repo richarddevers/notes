@@ -42,6 +42,13 @@ Note of the specialization "Software Design and Architecture" on Coursera from t
 
 the CRC cards agencement is reffered as "CRC Models"
 
+# Models
+
+- Entity objects: Products or 'Actors'. Manageable objects type.
+- control objects: receive events , coordinate actions and process
+- boundary objects: connect the system to the outside worls. Eithers in input or ouput.
+
+Usually expressed in visual notation using UML (unified modelling language)
 
 # Four design principle
 
